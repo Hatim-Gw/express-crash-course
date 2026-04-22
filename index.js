@@ -4,6 +4,17 @@ const members = require("./Members");
 
 const app = express();
 
+// meddleware, always use next to move to the next middleware
+const logger = (req, res, next) => {
+  console.log(
+    `${req.protocol}||(req.protocol) ||://${req.get("host")} ||(req.get"host") ||${req.originalUrl}`,
+  );
+  next();
+};
+
+//init middleware
+app.use(logger);
+
 const PORT = process.env.Port || 5050;
 
 app.get("/api/members", (req, res) => {
