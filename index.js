@@ -4,12 +4,35 @@ const app = express();
 
 const PORT = process.env.Port || 5050;
 
+const members = [
+  {
+    id: 1,
+    name: "John Doe",
+    email: "john@example.com",
+  },
+  {
+    id: 2,
+    name: "Jane Doe",
+    email: "jane@example.com",
+  },
+  {
+    id: 3,
+    name: "Bob Smith",
+    email: "bob@example.com",
+  },
+];
+
+app.get("/api/members", (req, res) => {
+  res.json(members);
+});
+
 // app.get("/", (req, res) => {
 //   res.sendFile(path.join(__dirname, "public", "index.html"));
 // });
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, "public")));
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
