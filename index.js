@@ -5,12 +5,24 @@ const logger = require("./middleware/logger");
 const app = express();
 
 //init middleware
-app.use(logger);
+//app.use(logger);
 
 const PORT = process.env.Port || 5050;
 
 app.get("/api/members", (req, res) => {
   res.json(members);
+});
+
+//get single member
+app.get("/api/members/:id", (req, res) => {
+  const found = members.some((member) => member.id === parseInt(req.params.id));
+
+  if (!found) {
+    return res
+      .status(400)
+      .json({ msg: `No member with the id of ${req.params.id}` });
+  }
+  res.json(members.filter((member) => member.id === parseInt(req.params.id)));
 });
 
 // app.get("/", (req, res) => {
