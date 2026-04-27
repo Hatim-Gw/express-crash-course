@@ -8,6 +8,10 @@ const app = express();
 //init middleware
 //app.use(logger);
 
+//body parser middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 const PORT = process.env.Port || 5050;
 
 // app.get("/", (req, res) => {
